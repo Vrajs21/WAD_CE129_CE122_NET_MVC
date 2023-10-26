@@ -1,0 +1,28 @@
+﻿@model List<Subject>
+
+
+<div class="container-fluid row">
+
+    @foreach(var subject in Model){
+      <div class="mb-4 col-md-6 col-lg-4 px-lg-2">
+        <div class="card shadow text-center" style="padding:0; height:350px">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">@subject.Name</h6>
+            </div>
+            <div style="width:100%; height:200px">
+                @if(@subject.Image != null){
+			        var base64 = Convert.ToBase64String(@subject.Image);
+				    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    <img src="@imgSrc" alt="" style="width:100%; height:100%;object-fit:cover">
+			    }else {
+                    <img src="~/img/class_placeholder.png" alt="" style="width:100%; height:100%;object-fit:cover">
+                }
+            </div>
+            <div class="card-body">
+                <p>Instructor: @subject.Teacher.FullName </p>
+                <a asp-action="Details" asp-controller="Subject" asp-route-id="@subject.Id" class="btn btn-primary text-center">Details</a>
+            </div>
+        </div>
+      </div>
+    }
+</div>
